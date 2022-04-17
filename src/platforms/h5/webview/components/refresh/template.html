@@ -1,0 +1,96 @@
+<style>
+  :host {
+    display: block;
+    width: 100%;
+    height: 40px;
+    position: absolute;
+    top: 0px;
+  }
+
+  :host(.page-refresh-transparent) {
+    top: -44px;
+  }
+
+  .page-refresh,
+  .page-refresh-inner {
+    display: flex;
+    width: 40px;
+    height: 40px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+  }
+
+  .page-refresh {
+    position: absolute;
+    left: 50%;
+    z-index: 997;
+    -webkit-transform: translate3d(-50%, 0, 0);
+    transform: translate3d(-50%, 0, 0);
+    background: #fff;
+    box-shadow: 0 1px 6px rgb(0 0 0 / 12%), 0 1px 4px rgb(0 0 0 / 12%);
+    display: none;
+  }
+
+  :host(.page-refresh--pulling) .page-refresh,
+  :host(.page-refresh--aborting) .page-refresh,
+  :host(.page-refresh--reached) .page-refresh,
+  :host(.page-refresh--refreshing) .page-refresh,
+  :host(.page-refresh--restoring) .page-refresh {
+    display: flex;
+  }
+  :host(.page-refresh--pulling) .page-refresh__spinner,
+  :host(.page-refresh--aborting) .page-refresh__spinner,
+  :host(.page-refresh--reached) .page-refresh__spinner,
+  :host(.page-refresh--refreshing) .page-refresh__icon,
+  :host(.page-refresh--restoring) .page-refresh__icon {
+    display: none;
+  }
+  :host(.page-refresh--refreshing) .page-refresh__spinner {
+    transform-origin: center center;
+    animation: page-refresh-rotate 2s linear infinite;
+  }
+  :host(.page-refresh--refreshing) .page-refresh__path {
+    stroke-dasharray: 1, 200;
+    stroke-dashoffset: 0;
+    stroke-linecap: round;
+    animation: page-refresh-dash 1.5s ease-in-out infinite;
+  }
+
+  @keyframes page-refresh-rotate {
+    100% {
+      -webkit-transform: rotate(360deg);
+      transform: rotate(360deg);
+    }
+  }
+  @keyframes page-refresh-dash {
+    0% {
+      stroke-dasharray: 1, 200;
+      stroke-dashoffset: 0;
+    }
+
+    50% {
+      stroke-dasharray: 89, 200;
+      stroke-dashoffset: -35px;
+    }
+
+    100% {
+      stroke-dasharray: 89, 200;
+      stroke-dashoffset: -124px;
+    }
+  }
+</style>
+
+<div class="page-refresh">
+  <div class="page-refresh-inner">
+    <svg fill="#2BD009" class="page-refresh__icon" width="24" height="24" viewBox="0 0 24 24">
+      <path
+        d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"
+      />
+      <path d="M0 0h24v24H0z" fill="none" />
+    </svg>
+    <svg class="page-refresh__spinner" width="24" height="24" viewBox="25 25 50 50">
+      <circle stroke="#2BD009" class="page-refresh__path" cx="50" cy="50" r="20" fill="none" stroke-width="4" stroke-miterlimit="10" />
+    </svg>
+  </div>
+</div>

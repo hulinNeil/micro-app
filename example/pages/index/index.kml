@@ -1,0 +1,16 @@
+<view class="container">
+  <text hidden="{{ true }}">"hello" '测试{{}}表达式'</text>
+  <view>count：{{ count }} =》 {{ count > 10 ? '大于10' : '小于等于10' }}</view>
+  <view>{{ [1, 2, 3, 4, op, [1, 2]] }}</view>
+  <view>{{ user.name || count }}</view>
+  <view>{{ a + b }} + {{ c }} + d</view>
+  <view>{{ count > 10 }}</view>
+  <view>{{ 'hello' + name }}</view>
+  <button size="mini" bindtap="addFunc" bindlongtap="subFunc">渲染button</button>
+  <button size="mini" type="primary" bindtap="bindViewTap1">跳转title渐变页面</button>
+  <button size="mini" type="primary" bindtap="open2">跳转无title页面</button>
+  <button size="mini" type="primary" bindtap="bindViewTap">跳转无title页面</button>
+  <view class="a"></view>
+  <view class="b"></view>
+  <view class="c"></view>
+</view>

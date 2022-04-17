@@ -1,0 +1,25 @@
+<import src="/templates/header/index.kml" />
+<view>
+  <template is="header" data="{{title:'Camera'}}" />
+  <view class="uni-list">
+    <view class="uni-list-cell cell-pd">
+      <view class="uni-uploader">
+        <view class="uni-uploader-head">
+          <view class="uni-uploader-title">Click icon to add an image</view>
+          <view class="uni-uploader-info">{{ imageList.length }}/9</view>
+        </view>
+        <view class="uni-uploader-body">
+          <view class="uni-uploader__files">
+            <view class="uni-uploader__file" k:for="{{ imageList }}">
+              <image class="uni-uploader__img" src="{{ item }}"></image>
+            </view>
+            <view class="uni-uploader__input-box" hidden="{{imageList.length >= 9}}">
+              <view class="uni-uploader__input" bindtap="chooseImage"></view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <button bindtap="removeImage">Remove images</button>
+</view>

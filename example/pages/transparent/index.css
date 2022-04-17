@@ -1,0 +1,24 @@
+.img {
+  width: 750rpx;
+  height: 500rpx;
+  background-color: aquamarine;
+}
+
+.test {
+  line-height: 400rpx;
+  font-size: 30px;
+  background-color: antiquewhite;
+}
+
+.button {
+  margin-top: 30px;
+}
+
+.a {
+  height: 400rpx;
+  background: #3F536E;
+}
+
+.b {
+  height: 400px;
+}

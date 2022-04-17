@@ -1,0 +1,7 @@
+<view class="container">
+  <view class="desc" >通过点击按钮或者滑动页面触发下拉刷新</view>
+  <view class="desc" >count: {{count}}</view>
+  <view class="uni-padding-wrap uni-common-mt">
+    <button type="primary" bindtap="startRefresh">手动触发页面刷新</button>
+  </view>
+</view>

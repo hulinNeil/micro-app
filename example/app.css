@@ -1,0 +1,24 @@
+@import "./templates/header/index.css";
+
+@font-face {
+  font-family: uniicons;
+  font-weight: normal;
+  font-style: normal;
+  src: url('//at.alicdn.com/t/font_2631793_58wq06j0ma.ttf?t=1624529053830') format('truetype');
+}
+
+.container {
+  padding: 30rpx;
+  background-color: #f8f8f8;
+}
+
+.page-section {
+  margin-bottom: 40rpx;
+  width: 100%;
+}
+
+.page-section-title {
+  font-size: 28rpx;
+  color: #999999;
+  margin-bottom: 8px;
+}

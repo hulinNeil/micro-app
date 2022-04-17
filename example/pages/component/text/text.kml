@@ -1,0 +1,11 @@
+<view class="container">
+  <view class="page-body">
+    <view class="page-section">
+      <view class="text-box">
+        <text>{{ text }}</text>
+      </view>
+      <button type="primary" disabled="{{ !canAdd }}" bindtap="add">add line</button>
+      <button type="warn" disabled="{{ !canRemove }}" bindtap="remove">remove line</button>
+    </view>
+  </view>
+</view>

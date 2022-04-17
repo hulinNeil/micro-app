@@ -1,0 +1,15 @@
+.common-page-head {
+  padding: 35rpx;
+  text-align: center;
+}
+
+.common-page-head-title {
+  display: inline-block;
+  padding: 0 40rpx;
+  font-size: 30rpx;
+  height: 88rpx;
+  line-height: 88rpx;
+  color: #BEBEBE;
+  box-sizing: border-box;
+  border-bottom: 2rpx solid #D8D8D8;
+}

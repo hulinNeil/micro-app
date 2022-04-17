@@ -1,0 +1,5 @@
+<view class="container log-list">
+  <image src="https://hellouniapp.dcloud.net.cn/static/shuijiao.jpg" class="img" />
+  <view class="test">胡林Neil</view>
+  <button bindtap="back">返回原来的页面</button>
+</view>

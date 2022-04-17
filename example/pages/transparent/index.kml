@@ -1,0 +1,7 @@
+<view class="container">
+  <image src="https://hellouniapp.dcloud.net.cn/static/shuijiao.jpg" class="img" />
+  <view class="test">渐变title</view>
+  <button bindtap="back" class="button">返回原来的页面</button>
+  <view class="a"></view>
+  <view class="b"></view>
+</view>

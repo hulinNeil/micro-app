@@ -1,0 +1,87 @@
+{
+  "name": "kiple-micro-app",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build:v2:h6": "cross-env NODE_ENV=dev PLATFORM=h5 webpack --config build/webpack.config1.js",
+    "dev:h5": "cross-env NODE_ENV=dev PLATFORM=h5 webpack -w --config build/webpack.config.js",
+    "dev:app": "cross-env NODE_ENV=dev PLATFORM=app webpack -w --config build/webpack.config.js",
+    "build:h5": "cross-env NODE_ENV=production PLATFORM=h5 webpack --config build/webpack.config.js",
+    "build:app": "cross-env NODE_ENV=production PLATFORM=app webpack --config build/webpack.config.js",
+    "build:jsBridge": "webpack --config build/webpack.jsBridge.js",
+    "build:template-parser": "ts-node-dev compiler/v0.2/rollup.templateParser.ts",
+    "compiler:v2": "ts-node-dev compiler/v0.2/rollup.build.ts",
+    "compiler:v2:watch": "ts-node-dev compiler/v0.2/rollup.watch.ts",
+    "compiler:v1": "ts-node-dev compiler/v0.1/index.ts",
+    "test": "jest --runInBand --forceExit --colors --detectOpenHandles"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "eventemitter3": "^4.0.7",
+    "history": "^5.0.0",
+    "rollup": "^2.45.2",
+    "webpack": "^5.34.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.13.16",
+    "@babel/generator": "^7.14.3",
+    "@babel/parser": "^7.14.3",
+    "@babel/plugin-proposal-class-properties": "^7.13.0",
+    "@babel/plugin-transform-runtime": "^7.13.15",
+    "@babel/preset-env": "^7.13.15",
+    "@babel/preset-typescript": "^7.13.0",
+    "@babel/runtime": "^7.13.17",
+    "@babel/traverse": "^7.14.2",
+    "@rollup/plugin-alias": "^3.1.2",
+    "@rollup/plugin-babel": "^5.3.0",
+    "@rollup/plugin-inject": "^4.0.3",
+    "@rollup/plugin-node-resolve": "^11.2.1",
+    "@rollup/plugin-replace": "^2.4.2",
+    "@types/babel__core": "^7.1.14",
+    "@types/babel__preset-env": "^7.9.1",
+    "@types/fs-extra": "^9.0.11",
+    "@types/jest": "^26.0.23",
+    "@types/node": "^15.12.1",
+    "@types/postcss-import": "^12.0.0",
+    "babel-loader": "^8.2.2",
+    "chokidar": "^3.5.2",
+    "cross-env": "^7.0.3",
+    "css-loader": "^5.2.4",
+    "domhandler": "^4.3.0",
+    "fs-extra": "^10.0.0",
+    "html-webpack-plugin": "^5.3.1",
+    "htmlparser2": "^6.1.0",
+    "jest": "^27.0.6",
+    "mini-css-extract-plugin": "^2.1.0",
+    "postcss": "^8.3.5",
+    "postcss-import": "^14.0.2",
+    "rollup-plugin-serve": "^1.1.0",
+    "rollup-plugin-typescript2": "^0.30.0",
+    "ts-jest": "^27.0.3",
+    "ts-loader": "^9.0.2",
+    "ts-node-dev": "^1.1.6",
+    "tslib": "^2.2.0",
+    "typescript": "^4.2.4",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.2"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "ts"
+    ],
+    "rootDir": "compiler",
+    "testRegex": ".test.ts$",
+    "transform": {
+      "^.+\\.(t|j)s$": "ts-jest"
+    },
+    "collectCoverageFrom": [
+      "**/*.(t|j)s"
+    ],
+    "coverageDirectory": "../coverage"
+  }
+}

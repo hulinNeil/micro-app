@@ -1,0 +1,26 @@
+<import src="../../../templates/header/index.kml" />
+<view class="container">
+  <template is="header" data="{{title:'view2'}}" />
+  <view class="page-section">
+    <view class="page-section-title">
+      <text>flex-direction: row\n横向布局</text>
+    </view>
+    <my-component a="100" />
+    <view class="flex-wrapper" style="flex-direction: row">
+      <view hover-class="hover-green" hover-start-time="20" hover-stay-time="70" class="flex-item demo-text-1">A</view>
+      <view hover-class="hover-blue" class="flex-item demo-text-2">B</view>
+      <view hover-class="hover-red" class="flex-item demo-text-3">C</view>
+    </view>
+  </view>
+  <my-component a="1" />
+  <view class="page-section">
+    <view class="page-section-title" bindTap="test">
+      <text>flex-direction: column\n纵向布局{{a}}</text>
+    </view>
+    <view class="flex-wrapper flex-wrapper-column">
+      <view hover-class="hover-green" class="flex-item demo-text-1">A</view>
+      <view hover-class="hover-blue" class="flex-item demo-text-2">B</view>
+      <view hover-class="hover-red" class="flex-item demo-text-3">C</view>
+    </view>
+  </view>
+</view>

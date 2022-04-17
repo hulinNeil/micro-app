@@ -1,0 +1,20 @@
+<view class="container">
+  <view class="header-logo">
+    <image class="img" src="/static/componentIndex.png"></image>
+  </view>
+  <view class="desc"
+    >以下将展示小程序官方组件能力，组件样式仅供参考，开发者可根据自身需求自定义组件样式，具体属性参数详见文档: https://www.kiple.com</view
+  >
+  <view class="panel" k:for="{{ list }}">
+    <view class="panel-h {{ item.open ? 'panel-h-on' : '' }}" data-index="{{ index }}" bindtap="triggerCollapse">
+      <text class="panel-text">{{ item.name }}</text>
+      <view class="icon">&#xe62c;</view>
+    </view>
+    <view class="panel-c" k:if="{{ item.open }}">
+      <view class="navigate-item" k:for="{{ item.pages }}" data-url="{{ item }}" bindtap="goDetailPage">
+        <view>{{ item }}</view>
+        <view class="icon">&#xe62d;</view>
+      </view>
+    </view>
+  </view>
+</view>

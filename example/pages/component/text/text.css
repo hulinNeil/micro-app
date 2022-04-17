@@ -1,0 +1,13 @@
+.text-box {
+  min-height: 300rpx;
+  text-align: center;
+  line-height: 1.8;
+  font-size: 30rpx;
+  background-color: #FFFFFF;
+  margin-bottom: 70rpx;
+  padding: 20rpx 0;
+}
+
+.page-section button {
+  margin-bottom: 30rpx;
+}

@@ -1,0 +1,44 @@
+{
+  "pages": [
+    "pages/tabBar/component/index",
+    "pages/tabBar/API/index",
+    "pages/index/index",
+    "pages/component/view/view",
+    "pages/component/text/text",
+    "pages/component/button/button",
+    "pages/component/image/image",
+    "pages/component/navigator/navigator",
+    "pages/logs/logs",
+    "pages/transparent/index",
+    "pages/api/set-navigation-bar/set-navigation-bar",
+    "pages/api/image/image",
+    "pages/api/pull-down-refresh/pull-down-refresh"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "小程序",
+    "backgroundColor": "#f8f8f8",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "color": "#7A7E83",
+    "selectedColor": "#007AFF",
+    "borderStyle": "black",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/tabBar/component/index",
+        "iconPath": "static/component.png",
+				"selectedIconPath": "static/componentHL.png",
+        "text": "内置组件"
+      },
+      {
+        "pagePath": "pages/tabBar/API/index",
+        "iconPath": "static/api.png",
+				"selectedIconPath": "static/apiHL.png",
+        "text": "接口"
+      }
+    ]
+  }
+}

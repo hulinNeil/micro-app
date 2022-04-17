@@ -1,0 +1,20 @@
+<view class="container">
+  <view class="header-logo">
+    <image class="img" src="/static/apiIndex.png"></image>
+  </view>
+  <view class="desc"
+    >以下将展示小程序官方 API 接口能力，具体属性参数详见文档: https://www.kiple.com</view
+  >
+  <view class="panel" k:for="{{ list }}">
+    <view class="panel-h {{ item.open ? 'panel-h-on' : '' }}" data-index="{{ index }}" bindtap="triggerCollapse">
+      <text class="panel-text">{{ item.name }}</text>
+      <view class="icon">&#xe62c;</view>
+    </view>
+    <view class="panel-c" k:if="{{ item.open }}">
+      <view class="navigate-item" k:for="{{ item.pages }}" data-url="{{ item.url }}" bindtap="goDetailPage">
+        <view>{{ item.name }}</view>
+        <view class="icon">&#xe62d;</view>
+      </view>
+    </view>
+  </view>
+</view>
