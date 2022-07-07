@@ -54,8 +54,8 @@ Page({
   goDetailPage(e) {
     const url = e.target.dataset.url;
     console.log(url);
-    kiple.navigateTo({
-      url: 'pages/component/' + url + '/' + url,
+    wx.navigateTo({
+      url: '/pages/component/' + url + '/' + url,
     });
   },
   triggerCollapse(e) {

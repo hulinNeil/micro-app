@@ -30,15 +30,16 @@
       {
         "pagePath": "pages/tabBar/component/index",
         "iconPath": "static/component.png",
-				"selectedIconPath": "static/componentHL.png",
+        "selectedIconPath": "static/componentHL.png",
         "text": "内置组件"
       },
       {
         "pagePath": "pages/tabBar/API/index",
         "iconPath": "static/api.png",
-				"selectedIconPath": "static/apiHL.png",
+        "selectedIconPath": "static/apiHL.png",
         "text": "接口"
       }
     ]
-  }
+  },
+  "sitemapLocation": "sitemap.json"
 }

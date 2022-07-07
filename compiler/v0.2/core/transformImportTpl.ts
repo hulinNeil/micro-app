@@ -10,7 +10,7 @@ interface ITemplateStore {
 const templates: ITemplateStore = {};
 
 /**
- * 保存引入的 template 模板: <import src="../../../templates/header/index.kml" />
+ * 保存引入的 template 模板: <import src="../../../templates/header/index.wxml" />
  * @param {ASTElement} htmlAST 页面模板的 ast 元素
  * @param {String} inputFile app.json 路径
  * @param {String} fileName 页面路径
@@ -26,8 +26,8 @@ export const saveImportedTemplate = (htmlAST: ASTElement[], inputFile: string, f
     if (htmlAST[index] && htmlAST[index].type === 'tag' && (htmlAST[index] as any).name === 'import') {
       let src = htmlAST[index].attribs.src as string;
       if (src) {
-        if (!~src.indexOf('.kml')) {
-          src = src + '.kml';
+        if (!~src.indexOf('.wxml')) {
+          src = src + '.wxml';
         }
         if (src[0] === '/') {
           src = getResolvePath(inputFile, '../', '.' + src);

@@ -6,7 +6,7 @@ import { saveImportedTemplate } from '../core/transformImportTpl';
 import { getRelativePath, getUpperCasePath, resolveApp } from '../utils';
 
 /**
- * 处理小程序中的所有模板 .kml 文件
+ * 处理小程序中的所有模板 .wxml 文件
  */
 const parserKml = () => {
   let inputFile = '';
@@ -16,7 +16,7 @@ const parserKml = () => {
       inputFile = resolveApp(options.input);
     },
     transform(source: any, pagePath: string) {
-      if (/\.kml/.test(pagePath)) {
+      if (/\.wxml/.test(pagePath)) {
         const pageRoute = getRelativePath(inputFile, pagePath);
         const pageVariable = getUpperCasePath(pageRoute).split('.')[0];
 

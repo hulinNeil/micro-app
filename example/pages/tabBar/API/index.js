@@ -167,8 +167,8 @@ Page({
   goDetailPage(e) {
     const url = e.target.dataset.url;
     console.log(url);
-    kiple.navigateTo({
-      url: 'pages/api/' + url + '/' + url,
+    wx.navigateTo({
+      url: '/pages/api/' + url + '/' + url,
     });
   },
   triggerCollapse(e) {

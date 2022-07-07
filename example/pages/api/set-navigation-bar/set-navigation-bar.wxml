@@ -1,4 +1,4 @@
-<import src="../../../templates/header/index.kml" />
+<import src="../../../templates/header/index.wxml" />
 <view class="container">
   <template is="header" data="{{title:'navigationBar'}}" />
   <view class="desc" >在 page.json 里配置文字内容及标题颜色，也可通过 api 接口将其改变。</view>

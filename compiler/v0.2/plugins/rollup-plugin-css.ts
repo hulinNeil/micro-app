@@ -41,9 +41,9 @@ const parserCss = () => {
       inputFile = resolveApp(options.input);
     },
     transform: async function (source: string, fileName: string) {
-      if (/\.css$/.test(fileName)) {
+      if (/\.wxss$/.test(fileName)) {
         let hash = '';
-        if (!/app\.css/.test(fileName)) {
+        if (!/app\.wxss/.test(fileName)) {
           hash = getFileHash(fileName, this);
         }
 

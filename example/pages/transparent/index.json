@@ -1,6 +1,6 @@
 {
   "navigationBarTitleText": "渐变title",
   "usingComponents": {},
-  "navigationStyle": "transparent",
+  "navigationStyle": "custom",
   "enablePullDownRefresh": true
 }

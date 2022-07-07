@@ -1,8 +1,7 @@
 {
-  "name": "kiple-micro-app",
+  "name": "micro-app",
   "version": "0.0.1",
   "description": "",
-  "main": "index.js",
   "scripts": {
     "build:v2:h6": "cross-env NODE_ENV=dev PLATFORM=h5 webpack --config build/webpack.config1.js",
     "dev:h5": "cross-env NODE_ENV=dev PLATFORM=h5 webpack -w --config build/webpack.config.js",

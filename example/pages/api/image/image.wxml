@@ -1,4 +1,4 @@
-<import src="/templates/header/index.kml" />
+<import src="/templates/header/index.wxml" />
 <view>
   <template is="header" data="{{title:'Camera'}}" />
   <view class="uni-list">
@@ -10,7 +10,7 @@
         </view>
         <view class="uni-uploader-body">
           <view class="uni-uploader__files">
-            <view class="uni-uploader__file" k:for="{{ imageList }}">
+            <view class="uni-uploader__file" wx:for="{{ imageList }}">
               <image class="uni-uploader__img" src="{{ item }}"></image>
             </view>
             <view class="uni-uploader__input-box" hidden="{{imageList.length >= 9}}">

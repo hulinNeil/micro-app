@@ -108,7 +108,7 @@ const generateFromAST = (htmlAST: ASTElement): IGenCode => {
  * 3. 先编译外部js在编译当前js
  */
 export const transformTemplate = (currentPath: string, resolvePath: string): { [key: string]: { moduleName: string; code: string } } => {
-  let targetPath = !/.kml$/.test(currentPath) ? `${currentPath}.kml` : currentPath;
+  let targetPath = !/.wxml$/.test(currentPath) ? `${currentPath}.wxml` : currentPath;
 
   if (hasRequired.includes(targetPath)) {
     return {};

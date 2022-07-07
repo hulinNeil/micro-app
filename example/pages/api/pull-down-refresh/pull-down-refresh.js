@@ -4,11 +4,11 @@ Page({
   },
   onPullDownRefresh() {
     setTimeout(() => {
-      kiple.stopPullDownRefresh();
+      wx.stopPullDownRefresh();
       this.setData({ count: this.data.count + 1 });
     }, 1000);
   },
   startRefresh() {
-    kiple.startPullDownRefresh();
+    wx.startPullDownRefresh();
   },
 });

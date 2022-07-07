@@ -4,7 +4,7 @@ import generateFromAST from './generateFromAST';
 import { htmlParser } from './helper';
 
 /**
- * 处理页面中的 template 标签: `<include src="./footer.kml"/>`
+ * 处理页面中的 template 标签: `<include src="./footer.wxml"/>`
  * 
  * 可以将目标文件除了 template/wxs 外的整个代码引入，相当于是拷贝到 include 位置,支持在里面写 page 的变量
  * @param {ASTElement} htmlAST 需要处理的template节点
@@ -17,8 +17,8 @@ const transformIncludeTemplate = (htmlAST: ASTElement): IGenCode => {
     throw new Error('页面[`' + htmlAST.__pageRoute__ + '`]中 template `src` 属性不能为空');
   }
 
-  if (!~src.indexOf('.kml')) {
-    src = src + '.kml';
+  if (!~src.indexOf('.wxml')) {
+    src = src + '.wxml';
   }
   if (src[0] === '/') {
     src = getResolvePath(htmlAST.__rootPath__, '../', '.' + src);

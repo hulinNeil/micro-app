@@ -45,7 +45,7 @@ let conditionalCount = 0;
 /**
  * 解析小程序模板语法的主入口，根据 ast 生成 render 所需的 code.
  *
- * 如果 属性中含有 k:for="{{}}" 那么需要将当前的节点使用函数返回结果
+ * 如果 属性中含有 wx:for="{{}}" 那么需要将当前的节点使用函数返回结果
  */
 const generateFromAST = (htmlAST: ASTElement): IGenCode => {
   let result: IGenCode = { variates: [], code: '', arrayElements: {}, conditional: [] };
@@ -66,18 +66,18 @@ const generateFromAST = (htmlAST: ASTElement): IGenCode => {
     if (htmlAST.name === 'include') {
       return transformIncludeTemplate(htmlAST);
     }
-    // 需要判断下，html 是否是 k:if,k:else, k:elif
-    if (htmlAST.attribs && (htmlAST.attribs['k:if'] || htmlAST.attribs.hasOwnProperty('k:else') || htmlAST.attribs['k:elif'])) {
+    // 需要判断下，html 是否是 wx:if,wx:else, wx:elif
+    if (htmlAST.attribs && (htmlAST.attribs['wx:if'] || htmlAST.attribs.hasOwnProperty('wx:else') || htmlAST.attribs['wx:elif'])) {
       let key = '';
-      if (htmlAST.attribs['k:if']) {
+      if (htmlAST.attribs['wx:if']) {
         key = 'if';
         conditionalCount += 1;
         result.code = `conditional${conditionalCount}`;
       } else {
         // 只有同级的else才加入到数组中，不是的话直接忽略
         const prev = getPrev(htmlAST);
-        if (prev && prev.attribs && (prev.attribs['k:if'] || prev.attribs['k:elif'])) {
-          key = htmlAST.attribs['k:elif'] ? 'elif' : 'else';
+        if (prev && prev.attribs && (prev.attribs['wx:if'] || prev.attribs['wx:elif'])) {
+          key = htmlAST.attribs['wx:elif'] ? 'elif' : 'else';
         }
       }
       if (key) {
@@ -87,8 +87,8 @@ const generateFromAST = (htmlAST: ASTElement): IGenCode => {
       return result;
     }
 
-    // 需要判断下，htmlAST.attribs 是否存在 k:for, 如果存在的话，这一块就跳过
-    if (htmlAST.attribs && htmlAST.attribs['k:for']) {
+    // 需要判断下，htmlAST.attribs 是否存在 wx:for, 如果存在的话，这一块就跳过
+    if (htmlAST.attribs && htmlAST.attribs['wx:for']) {
       arrayCount += 1;
       result.arrayElements[`array${arrayCount}`] = htmlAST;
       result.code = `array${arrayCount}`;
@@ -123,7 +123,7 @@ const generateFromAST = (htmlAST: ASTElement): IGenCode => {
     // 校验标签是内置组件、自定义组件(在编译项目的时候校验)
     if (!process.env.BUILD_TYPE && process.env.BUILD_TYPE !== 'framework') {
       if (!componentNames.includes(htmlAST.name)) {
-        const pageConfig = allPages[htmlAST.__pageRoute__.replace('.kml', '')].config;
+        const pageConfig = allPages[htmlAST.__pageRoute__.replace('.wxml', '')].config;
         if (!pageConfig.usingComponents || !pageConfig.usingComponents[htmlAST.name]) {
           throw new Error(`${htmlAST.__pageRoute__} 文件内容错误: "${htmlAST.name}" 未定义`);
         }

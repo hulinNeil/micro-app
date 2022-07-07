@@ -4,9 +4,9 @@ import transformFor from './transformFor';
 
 const getIfCode = (variateName: string, ast: ASTElement, indexKey?: string, itemKey?: string) => {
   const result: IForCode = { code: '', variates: [] };
-  const conditionalString = ast.attribs['k:if'];
+  const conditionalString = ast.attribs['wx:if'];
   const conditional = getData(conditionalString);
-  delete ast.attribs['k:if'];
+  delete ast.attribs['wx:if'];
 
   const _result = generateFromAST(ast);
   //处理 for 循环语句
@@ -28,9 +28,9 @@ const getElifCode = (variateName: string, ast?: ASTElement[] | ASTElement, index
   }
 
   const code = ast.map((item) => {
-    const conditionalString = item.attribs['k:elif'];
+    const conditionalString = item.attribs['wx:elif'];
     const conditional = getData(conditionalString).values[0];
-    delete item.attribs['k:elif'];
+    delete item.attribs['wx:elif'];
 
     const _result = generateFromAST(item);
     //处理 for 循环语句
@@ -52,7 +52,7 @@ const getElseCode = (variateName: string, ast?: ASTElement, indexKey?: string, i
   if (!ast) {
     return result;
   }
-  delete ast.attribs['k:else'];
+  delete ast.attribs['wx:else'];
 
   const _result = generateFromAST(ast);
   //处理 for 循环语句
@@ -67,7 +67,7 @@ const getElseCode = (variateName: string, ast?: ASTElement, indexKey?: string, i
 };
 
 /**
- * 处理 k:if, k:else, k:elif
+ * 处理 wx:if, wx:else, wx:elif
  * @param {Array} data 需要进行条件渲染的 ast 元素
  * @param {String} indexKey 当前逻辑如果处于一个列表循环里面, 需要传入 indexKey, 以确保当前逻辑结束, 上个循环的 index 变量没有发生变化
  * @param {String} itemKey 当前逻辑如果处于一个列表循环里面, 需要传入 itemKey, 以确保当前逻辑结束, 上个循环的 item 变量没有发生变化

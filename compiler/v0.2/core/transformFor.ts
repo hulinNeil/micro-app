@@ -3,7 +3,7 @@ import generateFromAST, { getData } from './generateFromAST';
 import transformIf from './transformIf';
 
 /**
- * 处理 k:for 的元素
+ * 处理 wx:for 的元素
  * @param {Object} arrayElements 需要循环渲染的 ast 元素
  * @param {String} indexKey 当前逻辑如果处于一个列表循环里面, 需要传入 indexKey, 以确保当前逻辑结束, 上个循环的 index 变量没有发生变化
  * @param {String} itemKey 当前逻辑如果处于一个列表循环里面, 需要传入 itemKey, 以确保当前逻辑结束, 上个循环的 item 变量没有发生变化
@@ -13,14 +13,14 @@ const transformFor = (arrayElements: IGenCode['arrayElements'], indexKey?: strin
   const keys = Object.keys(arrayElements);
 
   keys.forEach((key) => {
-    // 先获取 k:for 的值，解析它，然后将其从 ast 中删除
-    var listString = arrayElements[key].attribs['k:for'];
+    // 先获取 wx:for 的值，解析它，然后将其从 ast 中删除
+    var listString = arrayElements[key].attribs['wx:for'];
     const list = getData(listString).values[0];
-    const index = arrayElements[key].attribs['k:for-index'] || 'index';
-    const item = arrayElements[key].attribs['k:for-item'] || 'item';
-    delete arrayElements[key].attribs['k:for'];
-    delete arrayElements[key].attribs['k:for-item'];
-    delete arrayElements[key].attribs['k:for-index'];
+    const index = arrayElements[key].attribs['wx:for-index'] || 'index';
+    const item = arrayElements[key].attribs['wx:for-item'] || 'item';
+    delete arrayElements[key].attribs['wx:for'];
+    delete arrayElements[key].attribs['wx:for-item'];
+    delete arrayElements[key].attribs['wx:for-index'];
 
     // 解析当前节点
     const _result = generateFromAST(arrayElements[key]);

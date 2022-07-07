@@ -115,7 +115,7 @@ export const viewRoot = () => ({
   name: 'transform-config',
   transform(source: string, fileName: string) {
     if (/app\.json$/.test(fileName)) {
-      var code = "import {__AppCssCode__,setCssToHead} from  'inject/view.js';import AppStyle from './app.css';";
+      var code = "import {__AppCssCode__,setCssToHead} from  'inject/view.js';import AppStyle from './app.wxss';";
       const result: IPageModule[] = [];
 
       // 获取页面的模板和样式
@@ -124,19 +124,19 @@ export const viewRoot = () => ({
         let cssModuleName = moduleName + 'Style';
         const targetPath = getResolvePath(fileName, '../', item);
 
-        // 只有当page必要的文件都存在时，才进行导入 .kml
-        if (!fileIsExist(targetPath + '.kml')) {
-          (this as any).addWatchFile(targetPath + '.kml');
-          throw new Error(`未找到 ${allPages[item].enterPath} 中的定义的 ${allPages[item].type} "${item}" 对应的 .kml 文件`);
+        // 只有当page必要的文件都存在时，才进行导入 .wxml
+        if (!fileIsExist(targetPath + '.wxml')) {
+          (this as any).addWatchFile(targetPath + '.wxml');
+          throw new Error(`未找到 ${allPages[item].enterPath} 中的定义的 ${allPages[item].type} "${item}" 对应的 .wxml 文件`);
         }
 
-        code += `import ${moduleName} from './${item}.kml';`;
+        code += `import ${moduleName} from './${item}.wxml';`;
 
-        // 判断 .css 文件是否存在，存在的话才进行导入，不存在的话加上监听
-        if (fileIsExist(targetPath + '.css')) {
-          code += `import ${cssModuleName} from './${item}.css';`;
+        // 判断 .wxss 文件是否存在，存在的话才进行导入，不存在的话加上监听
+        if (fileIsExist(targetPath + '.wxss')) {
+          code += `import ${cssModuleName} from './${item}.wxss';`;
         } else {
-          (this as any).addWatchFile(targetPath + '.css');
+          (this as any).addWatchFile(targetPath + '.wxss');
           cssModuleName = '';
         }
 

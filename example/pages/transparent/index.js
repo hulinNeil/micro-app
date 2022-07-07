@@ -1,10 +1,10 @@
 Page({
   back() {
-    kiple.navigateBack();
+    wx.navigateBack();
   },
   onPullDownRefresh() {
     setTimeout(() => {
-      kiple.stopPullDownRefresh();
+      wx.stopPullDownRefresh();
     }, 1000);
   },
 });

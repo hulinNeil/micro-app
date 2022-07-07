@@ -1,10 +1,10 @@
-@import "./templates/header/index.css";
+@import "./templates/header/index.wxss";
 
 @font-face {
   font-family: uniicons;
   font-weight: normal;
   font-style: normal;
-  src: url('//at.alicdn.com/t/font_2631793_58wq06j0ma.ttf?t=1624529053830') format('truetype');
+  src: url('https://at.alicdn.com/t/font_2631793_58wq06j0ma.ttf?t=1624529053830') format('truetype');
 }
 
 .container {

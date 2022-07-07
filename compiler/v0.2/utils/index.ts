@@ -57,11 +57,11 @@ export const getHashCode = (name: string, date: number): string => {
 };
 
 export const getFileHash = (fileName: string, _this: any) => {
-  if (/\.kml/.test(fileName)) {
-    fileName = fileName.split('.kml')[0];
+  if (/\.wxml/.test(fileName)) {
+    fileName = fileName.split('.wxml')[0];
   }
-  if (/\.css/.test(fileName)) {
-    fileName = fileName.split('.css')[0];
+  if (/\.wxss/.test(fileName)) {
+    fileName = fileName.split('.wxss')[0];
   }
 
   const appJson = Array.from(_this.getModuleIds())[0];

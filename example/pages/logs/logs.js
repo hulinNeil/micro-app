@@ -11,6 +11,6 @@ Page({
   },
   back() {
     console.log('-手动触发back事件--');
-    kiple.navigateBack();
+    wx.navigateBack();
   },
 });

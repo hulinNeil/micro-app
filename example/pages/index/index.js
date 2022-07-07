@@ -17,7 +17,7 @@ Page({
     console.log('===============', app, data);
   },
   bindViewTap() {
-    kiple.navigateTo({
+    wx.navigateTo({
       url: 'pages/logs/logs',
     });
   },
@@ -30,7 +30,7 @@ Page({
   onPullDownRefresh() {
     console.log('触发下拉刷新');
     setTimeout(function () {
-      kiple.stopPullDownRefresh();
+      wx.stopPullDownRefresh();
     }, 2000);
   },
   onReachBottom(e) {
@@ -43,7 +43,7 @@ Page({
     this.setData({ count: --this.data.count });
   },
   bindViewTap1() {
-    kiple.navigateTo({
+    wx.navigateTo({
       url: 'pages/transparent/index',
     });
   },

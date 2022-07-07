@@ -44,7 +44,7 @@ $ npm run build:app
 ├── app.config.js           # 业务代码中, app.json 和 page.json 的配置项集合
 ├── app.service.js          # 业务代码中, page.js 的打包集合, 业务逻辑代码
 ├── app.service.js.map      # source-map 文件, dev 时只打包业务逻辑代码的 source-map, 方便调试, UI 代码暂时不需要 source-map
-├── app.view.js             # 业务代码中, page.kml 的打包集合, 描述页面样式, 包含 dom 和 css
+├── app.view.js             # 业务代码中, page.wxml 的打包集合, 描述页面样式, 包含 dom 和 css
 ├── index.html              # 页面的初始入口文件
 ├── service.js              # 运行时, 基础 api 代码文件
 ├── webview.css             # 运行时, 全局样式文件
@@ -158,18 +158,18 @@ $ npm run build:app
     ├── page                      # 页面的目录，包含所有的页面
     │   ├── page1                 # 页面1,又4个部分组成
     │   │   ├── index.js          # 当前页面逻辑（所有js都编译成 define 模式，路径是相根目录的路径）
-    │   │   ├── index.css         # 当前页面的样式(解析所有的css，含有rpx的单独拎出来，成为数组的一项)
-    │   │   ├── index.kml         # 当前页面的UI结构(直接生成节点树)
+    │   │   ├── index.wxss        # 当前页面的样式(解析所有的css，含有rpx的单独拎出来，成为数组的一项)
+    │   │   ├── index.wxml        # 当前页面的UI结构(直接生成节点树)
     │   │   └── index.json        # 当前页面的自定义配置
     │   ├── page2        
     │   │   ├── test.js           # 当前页面逻辑（所有js都编译成define模式，路径是相根目录的路径）
-    │   │   ├── test.css          # 当前页面的样式(解析所有的css，含有rpx的单独拎出来，成为数组的一项)
-    │   │   ├── test.kml          # 当前页面的UI结构(直接生成节点树)
+    │   │   ├── test.wxss         # 当前页面的样式(解析所有的css，含有rpx的单独拎出来，成为数组的一项)
+    │   │   ├── test.wxml         # 当前页面的UI结构(直接生成节点树)
     │   │   └── test.json         # 当前页面的自定义配置    
     │   └── page ...              
-    ├── app.css                   # 全局样式
+    ├── app.wxss                  # 全局样式
     ├── app.js                    # 小程序逻辑
-    └── config.js                 # 小程序公共配置
+    └── app.json                  # 小程序公共配置
     ```
 2. 编译后生成的目录
       ```
@@ -179,10 +179,10 @@ $ npm run build:app
       ```
 3.  实现步骤
     - 循环遍历 app.json, 知道整个项目有哪些页面
-    - 遍历每个page，需要编译同名称的.js,.css,.kml,.json文件
+    - 遍历每个page，需要编译同名称的.js,.css,.wxml,.json文件
     - 编译 .js 文件: 1. 将 es6 编译为es5; 2. 分析文件依赖，先将依赖的 .js 文件进行 define 包裹; 3. 将此.js 进行 define 包裹.
     - 编译 .css 文件: 1. 分析文件依赖2. 通过正则将 rpx 抽出来，然后生成 `setCssToHead([],currentPath,...importPath)`;
-    - 编译 .kml 文件: 1. 直接生成 ast 树，然后踢出div等标签; 2. 根据 ast 树生成 createElement(xxx) 的树结构
+    - 编译 .wxml 文件: 1. 直接生成 ast 树，然后踢出div等标签; 2. 根据 ast 树生成 createElement(xxx) 的树结构
     - 编译 .json 文件: 合并到 config.js 中
     - 如何实现source map?
 4. 使用 webpack 进行打包
@@ -224,7 +224,7 @@ $ npm run build:app
   - 缺点：速度稍慢，初次需要 650ms, 再次 150ms
   - 优点：由于 view 和 service 使用 api 进行分开编译，相当于每次编译都是第一次，所以在参数传递上很好解决
 - 最终还是使用 rollup 的 watch 进行编译：
-  - 很难做到极致的静态语法分析，即使将 kml 中使用的变量传递到了 service 的编译器中，但是在 service 层，写法千奇百怪，`this.setData({src:'/static/test.png'})`, 这种可以分析出来，但是如果重写了 setData 就不易处理了，或者使用了js中的内变量对src进行赋值 `this.setData({src: this.path})`也不好处理
+  - 很难做到极致的静态语法分析，即使将 wxml 中使用的变量传递到了 service 的编译器中，但是在 service 层，写法千奇百怪，`this.setData({src:'/static/test.png'})`, 这种可以分析出来，但是如果重写了 setData 就不易处理了，或者使用了js中的内变量对src进行赋值 `this.setData({src: this.path})`也不好处理
   - 再写一个监听器，监听目标目录的静态资源文件（如 .png,.mp4,.gif 等）的变化，然后直接将所有的文件复制到 dist 目录
 
 ### 添加示例代码
@@ -235,7 +235,7 @@ $ npm run build:app
 - page 组件的高度
 - 处理文件夹含有-导致编译失败
 - 编译器不能监听 json 文件的的改变，从而触发重新编译
-- 只有页面 js/kml 有一个不存在时，需要提示错误，当 css 不存在时，不能出现报错，当添加 css 时，需要被编译器监听到
+- 只有页面 js/wxml 有一个不存在时，需要提示错误，当 css 不存在时，不能出现报错，当添加 css 时，需要被编译器监听到
 - css中, ::after, ::before不生效,原因：scope 添加到了伪类后面，`.uni-uploader__input-box::after[ba14242e]`
 - button 的 disabled/loading 不能动态修改
 - text 组件
