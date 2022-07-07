@@ -36,7 +36,7 @@ specifiers:
   postcss: ^8.3.5
   postcss-import: ^14.0.2
   rollup: ^2.45.2
-  rollup-plugin-serve: ^1.1.0
+  rollup-plugin-serve: ^2.0.0
   rollup-plugin-typescript2: ^0.30.0
   ts-jest: ^28.0.5
   ts-loader: ^9.0.2
@@ -86,7 +86,7 @@ devDependencies:
   mini-css-extract-plugin: 2.6.1_webpack@5.73.0
   postcss: 8.4.14
   postcss-import: 14.1.0_postcss@8.4.14
-  rollup-plugin-serve: 1.1.0
+  rollup-plugin-serve: 2.0.0
   rollup-plugin-typescript2: 0.30.0_okefoyb4o5sittgqayreuhurei
   ts-jest: 28.0.5_mwprd6hhcpczqm5enxplqm5dfm
   ts-loader: 9.3.1_3o2jfq6vfqxns3sz6wn2nnc3ei
@@ -5992,8 +5992,8 @@ packages:
       glob: 7.2.3
     dev: true
 
-  /rollup-plugin-serve/1.1.0:
-    resolution: {integrity: sha512-pYkSsuA0/psKqhhictkJw1c2klya5b+LlCvipWqI9OE1aG2M97mRumZCbBlry5CMEOzYBBgSDgd1694sNbmyIw==}
+  /rollup-plugin-serve/2.0.0:
+    resolution: {integrity: sha512-adII2hdsHyNftFhg4bx55B6ogZWmySEGtdqcqxwZQi3BryAnfzQ+xRb1/BLe3DR1lX9QxnpwtHbBCSULyXbMwA==}
     dependencies:
       mime: 3.0.0
       opener: 1.5.2

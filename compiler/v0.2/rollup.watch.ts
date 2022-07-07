@@ -48,7 +48,7 @@ const watchOptions = [
       }),
       serve({
         port: 9091,
-        historyApiFallbacwx: true,
+        historyApiFallback: true,
         contentBase: 'dist',
       }),
     ],
