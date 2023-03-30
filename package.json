@@ -3,7 +3,6 @@
   "version": "0.0.1",
   "description": "",
   "scripts": {
-    "build:v2:h6": "cross-env NODE_ENV=dev PLATFORM=h5 webpack --config build/webpack.config1.js",
     "dev:h5": "cross-env NODE_ENV=dev PLATFORM=h5 webpack -w --config build/webpack.config.js",
     "dev:app": "cross-env NODE_ENV=dev PLATFORM=app webpack -w --config build/webpack.config.js",
     "build:h5": "cross-env NODE_ENV=production PLATFORM=h5 webpack --config build/webpack.config.js",

@@ -24,6 +24,14 @@ export const getFileContent = (path: string) => {
 // 判断文件是否存在
 export const fileIsExist = (filePath: string) => fs.existsSync(filePath);
 
+// 判断文件夹是否存在，不存在则创建
+export const checkFolder = (folderPath: string) => {
+  const isExist = fs.existsSync(folderPath);
+  if (!isExist) {
+    fs.mkdirSync(folderPath);
+  }
+};
+
 // 获取绝对路径
 export const getRelativePath = (targetPath: string, curPath: string) => {
   let result = path.relative(targetPath, curPath);

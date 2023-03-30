@@ -1,7 +1,7 @@
 ## 项目基础 & 结构
 ### 运行命令
 ```bash
-# 编译器，运行脚本 -- 开发时
+# 编译器，运行脚本 -- 开发小程序应用时运行，需要频繁的 update，需要速度快些，所以使用 rollup 编译
 $ npm run compiler:v2:watch
 # 编译器，运行脚本 -- 打包
 $ npm run compiler:v2
@@ -9,7 +9,7 @@ $ npm run compiler:v2
 # 编译框架中 .tpl 模板的解析函数
 $ npm run build:template-parser
 
-# 运行时框架，运行命令
+# 运行时框架，运行命令，由于只有开发框架的时候才会用到，使用 webpack 编译就行
 $ npm run dev:h5
 $ npm run dev:app
 $ npm run build:h5

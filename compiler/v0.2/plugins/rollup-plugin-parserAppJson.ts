@@ -1,6 +1,6 @@
 import * as fs from 'fs-extra';
 import { IConfig, IPageModule } from '.';
-import { fileIsExist, getFileContent, getHashCode, getRelativePath, getResolvePath, getUpperCasePath, resolveApp } from '../utils';
+import { checkFolder, fileIsExist, getFileContent, getHashCode, getRelativePath, getResolvePath, getUpperCasePath, resolveApp } from '../utils';
 
 // 保存所有页面的路径信息
 export let allPages: { [path: string]: { type: 'page' | 'component'; enterPath: string; config: any } } = {};
@@ -99,6 +99,7 @@ export const serviceRoot = () => ({
       code += `\ninitApp();`;
 
       // 拷贝 index.html 到 dist 目录
+      checkFolder(resolveApp('dist'));
       fs.copyFileSync(resolveApp('compiler/v0.2/injects/index.html'), resolveApp('dist/index.html'));
 
       return { code, map: null };
