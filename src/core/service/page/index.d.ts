@@ -43,3 +43,26 @@ export interface IRegisterComponent {
   componentId: number;
   props: object;
 }
+
+export interface IComponentOptions {
+  properties?: { [key: string]: any }; // 组件的对外属性，是属性名到属性设置的映射表 - Done
+  data?: { [key: string]: any }; // 组件的内部数据，和 properties 一同用于组件的模板渲染, 微信小程序中 props如果和data有相同字段，以props为准 - Done
+  observers?: { [key: string]: Function }; // 组件数据字段监听器，用于监听 properties 和 data 的变化
+  methods?: { [key: string]: Function }; // 组件的方法，包括事件响应函数和任意的自定义方法
+  behaviors?: Array; // 类似于mixins和traits的组件间代码复用机制
+  relations?: { [key: string]: any }; // 组件间关系定义
+  lifetimes?: {
+    created?: Function; //	在组件实例刚刚被创建时执行 - Done
+    attached?: Function; //	在组件实例进入页面节点树时执行
+    ready?: Function; //	在组件在视图层布局完成后执行
+    moved?: Function; //	在组件实例被移动到节点树另一个位置时执行
+    detached?: Function; //	在组件实例被从页面节点树移除时执行
+    error?: (e: Error) => void; //	每当组件方法抛出错误时执行
+  };
+  pageLifetimes?: {
+    show?: Function; //	组件所在的页面被展示时执行
+    hide?: Function; //	组件所在的页面被隐藏时执行
+    resize?: (e: { [key: string]: number }) => void; //	组件所在的页面尺寸变化时执行
+    routeDone?: Function; //	在组件实例被从页面节点树移除时执行
+  };
+}
