@@ -1,6 +1,6 @@
 Page({
   data: { a: 22 },
   test() {
-    this.setData({ a: 200 });
+    this.setData({ a: this.data.a+1 });
   },
 });

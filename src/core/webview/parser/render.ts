@@ -1,10 +1,10 @@
-import { initComponent } from '@/platforms/h5/webview/page/component';
+import { componentPropsChange, initComponent } from '@/platforms/h5/webview/page/component';
 import { isFn, isPlainObject, isStr } from '@/util';
 import { addEvent, applyEvent } from './event';
 import { CreateIVirtualDomFunc } from './render.d';
 
 /**
- * 设置组件的属性，绑定事件监听
+ * 设置组件的属性，绑定事件监听，如果是自定义组件则负责通知组件属性发生改变
  * @param dom {HTMLElement} DOM节点
  * @param key {string} 属性名
  * @param value {any} 属性值
@@ -30,6 +30,12 @@ export const setProperty = (dom: HTMLElement, key: string, value: any) => {
       .replace(/-[a-z]/g, (e) => e[1].toLocaleUpperCase());
     dom.dataset[customKey] = value;
   } else if (value !== undefined) {
+    const { __isComponent__, __componentId__ } = dom as any;
+    // 处理自定义组件的 props 变化
+    if (__isComponent__) {
+      componentPropsChange(__componentId__, { [key]: value });
+      return;
+    }
     // 直接朝dome中进行赋值，可以使用Object.defineProperty在元素中进行监听需要的属性变化
     key = key.replace(/-[a-z]/g, (e) => e[1].toLocaleUpperCase());
     dom[key] = value;
@@ -49,6 +55,7 @@ export const createDomTree = (virtualDom: IVirtualDom | null, hash?: string): HT
       const dom = document.createElement(virtualDom.tag as string);
       if (virtualDom.props && virtualDom.props.__isComponent__) {
         initComponent(virtualDom, dom);
+        return dom; // 如果是自定义组件，不需要设置他的属性，由组件内部会处理
       }
       if (hash) {
         dom.setAttribute(hash, '');

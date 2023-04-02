@@ -20,6 +20,7 @@ export class Component {
     this.__componentId__ = componentId;
     this.__webviewId__ = webviewId;
     (parentNode as any).__componentId__ = componentId;
+    (parentNode as any).__isComponent__ = true;
     this.parentNode = parentNode;
   }
   render = (options: { [key: string]: any }) => {
@@ -60,7 +61,7 @@ export const ComponentFactory = {
   },
   getComById: (comId: number) => {
     const page = AppComponents.find((page) => page.__componentId__ === comId);
-    return page || null;
+    return page as Component;
   },
 };
 
@@ -99,4 +100,13 @@ export const renderComponent = (args: { options: WrapperComponent; route: string
   } else {
     component.reRender(options);
   }
+};
+
+/**
+ * 自定义组件 props 发生变化
+ */
+export const componentPropsChange = (componentId: number, props: Object) => {
+  const component = ComponentFactory.getComById(componentId) as Component;
+  // 通知 service 层， Component props 变化
+  KipleViewJSBridge.publishHandler('onComponentPropsChange', { componentId, props }, component.__webviewId__);
 };

@@ -1,6 +1,6 @@
 import { getCurrentPages } from '@/core/service/page/page';
 import { onAppRoute } from 'kiple-platform/service/api/route';
-import { getComponentById, registerComponent } from '@/core/service/page/component';
+import { getComponentById, onComponentPropsChange, registerComponent } from '@/core/service/page/component';
 
 interface PageEvent {
   eventName: string;
@@ -26,6 +26,8 @@ export default function initSubscribe(subscribe: ServiceJSBridge['subscribe']) {
 
   // 监听到注册组件
   subscribe('registerComponent', registerComponent);
+  // 监听到组件 props 变化
+  subscribe('onComponentPropsChange', onComponentPropsChange);
 
   // 监听 view 层触发的路由跳转事件,一般由tab切换，或者 navigate 组件触发
   subscribe('onRouteChange', (args: { type: string; options: any }) => {

@@ -102,9 +102,16 @@ export class WrapperComponent {
     this.methods[eventName] && this.methods[eventName].call(this.__getThis(), data);
   }
 
+  // 属性变化， 触发监听函数， 触发 render
+  __propsChange(props: Object) {
+    Object.assign(this.properties, props);
+    this.__triggerObservers(props);
+    this.setData({});
+  }
+
   public setData(data: Object) {
     Object.assign(this.data, data); // 修改 class 中的 data 状态
-    this.__triggerObservers(data); // 出发事件监听器，监听器里面获取到的数据应该是更新后的数据
+    this.__triggerObservers(data); // 触发事件监听器，监听器里面获取到的数据应该是更新后的数据
     const mergeDataProps = Object.assign({}, this.data, this.properties); // 合并数据
     const sendData = { options: { data: mergeDataProps, __componentId__: this.__componentId__ }, route: this.__route__ };
     KipleServiceJSBridge.publishHandler('RE_RENDER_COMPONENT', sendData, this.__webviewId__);
@@ -143,4 +150,14 @@ export const registerComponent = (args: IRegisterComponent, webviewId: number) =
 
   KipleServiceJSBridge.publishHandler('RENDER_COMPONENT', options, webviewId);
   console.log('create component end.');
+};
+
+/**
+ * 监听到组件 props 变化
+ */
+export const onComponentPropsChange = (args: { componentId: number; props: Object }, webviewId: number) => {
+  const component = getComponentById(args.componentId);
+  if (component) {
+    component.page.__propsChange(args.props);
+  }
 };
