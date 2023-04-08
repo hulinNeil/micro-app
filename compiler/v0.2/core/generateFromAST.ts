@@ -66,6 +66,12 @@ const generateFromAST = (htmlAST: ASTElement): IGenCode => {
     if (htmlAST.name === 'include') {
       return transformIncludeTemplate(htmlAST);
     }
+    // 判断是自定义组件中的 slot 元素
+    if(htmlAST.name === 'slot'){
+      result.variates.push('__component_slot');
+      result.code = `__component_slot['${htmlAST.attribs.name || 'default'}']`;
+      return result;
+    }
     // 需要判断下，html 是否是 wx:if,wx:else, wx:elif
     if (htmlAST.attribs && (htmlAST.attribs['wx:if'] || htmlAST.attribs.hasOwnProperty('wx:else') || htmlAST.attribs['wx:elif'])) {
       let key = '';

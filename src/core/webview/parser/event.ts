@@ -100,7 +100,7 @@ export const applyEvent = (element: HTMLElement, key: string, eventHandleName: s
       if (element.getAttribute('disabled')) {
         return;
       }
-      // 判断当前元素是否自定义组件里面
+      // 判断当前元素是否自定义组件里面, 如果是 slot 中的元素是事假如何处理？
       let componentId = 0;
       let parentNode = res.target.parentNode;
       while (parentNode) {

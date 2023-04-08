@@ -1,4 +1,5 @@
 <view> 
     <text class="aa">自定义组55件-props{{a}}</text>
     <view class="aa" bindtap="hh">哈哈哈-data: {{mm}}</view>
+    <slot></slot>
 </view>

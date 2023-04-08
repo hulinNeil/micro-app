@@ -15,6 +15,7 @@ export class Component {
   __route__: string = ''; // eg: 'components/test/test'
   __DOMTree__: HTMLElement | Text | Comment | null = null;
   __VirtualDom__: IVirtualDom | null = null;
+  __component_slot: { [key: string]: IVirtualDom | IVirtualDom[] } = {};
   parentNode: HTMLElement; // 一般为自定义组件的根节点，如：<my-component></my-component>
   constructor(parentNode: HTMLElement, webviewId: number, componentId: number) {
     this.__componentId__ = componentId;
@@ -24,8 +25,8 @@ export class Component {
     this.parentNode = parentNode;
   }
   render = (options: { [key: string]: any }) => {
-    // 合并 props 和 data
-    this.__VirtualDom__ = window.app[this.__route__].render(options.data);
+    // 根绝路由获取VirtualDom jsx 函数，然后生成 VirtualDom
+    this.__VirtualDom__ = window.app[this.__route__].render(Object.assign(options.data, { __component_slot: this.__component_slot || {} }));
     // 生成页面 Dom 树
     this.__DOMTree__ = createDomTree(this.__VirtualDom__, window.app[this.__route__].hash);
     if (this.__DOMTree__) {
@@ -35,7 +36,7 @@ export class Component {
   };
   // 组件内部出发更新事件
   reRender = (options: { [key: string]: any }) => {
-    const newVirtualDom = window.app[this.__route__].render(options.data || {});
+    const newVirtualDom = window.app[this.__route__].render(Object.assign(options.data, { __component_slot: this.__component_slot || {} }));
     const hash = window.app[this.__route__].hash;
     if (this.__DOMTree__ && this.__VirtualDom__) {
       // 这个方案是没有进行 key 的使用的 ！！！
@@ -80,6 +81,7 @@ export const initComponent = (virtualDom: IVirtualDom, parentNode: HTMLElement) 
   delete props.__isComponent__;
 
   component.__route__ = __route__;
+  component.__component_slot = { default: virtualDom.children };
 
   const args: IRegisterComponent = { componentId: __componentId__, route: __route__, props };
 

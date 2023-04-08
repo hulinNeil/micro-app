@@ -110,12 +110,3 @@ export const createElement = (tag: string, props: any, ...children: any[]): IVir
   children = children.flat();
   return { tag, props, children };
 };
-
-/**
- * 通过render函数和page的Data，生成虚拟dom(类似于react中的函数组件+props)
- * @param render {Function} 页面的渲染函数
- * @param data {Object} 页面的状态数据
- */
-export const createVirtualDom = (render: Function, data: Object): IVirtualDom => {
-  return render(data);
-};

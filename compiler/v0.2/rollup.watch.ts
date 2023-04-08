@@ -74,7 +74,7 @@ watcher.on('event', (event: any) => {
       break;
     case 'ERROR':
       errorList.push(event.error);
-      console.error('[Error]', event.error.message);
+      console.error('[Error]', event.error.stack);
       if (event.error.frame) {
         console.error(event.error.frame);
       }

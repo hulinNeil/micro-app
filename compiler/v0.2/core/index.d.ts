@@ -26,7 +26,7 @@ export interface Conditional {
 }
 
 interface IGenCode {
-  variates: string[];
+  variates: string[]; // 将模板中可能出现的变量收集出来，方便生成代码时使用
   code: string;
   arrayElements: { [key: string]: ASTElement };
   conditional: Conditional[]; // 条件语句使用有序的数组进行存档，方便遍历的时候获取

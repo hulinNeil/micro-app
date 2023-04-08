@@ -12,7 +12,10 @@
       <view hover-class="hover-red" class="flex-item demo-text-3">C</view>
     </view>
   </view>
-  <my-component />
+  <my-component>
+    <view>这里是 slot 的元素1111</view>
+    <view>这里是 slot 的元素2222</view>
+  </my-component>
   <view class="page-section">
     <view class="page-section-title" bindtap="test">
       <text>flex-direction: column\n纵向布局{{a}}</text>

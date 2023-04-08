@@ -256,7 +256,7 @@ $ npm run build:app
 ### 组件机制
 - import template: 引入模板 -> 使用模板; is 使用变量进行组合；数据只能在data里面传递 - (completed)
 - include template: 可以将目标文件除了 template/wxs 外的整个代码引入，相当于是拷贝到 include 位置,支持在里面写 page 的变量 - (completed)
-- Component 组件: 含有生命周期的组件，支持组件diff，减少页面渲染次数; slot 语法;
+- Component 组件: 含有生命周期的组件，支持组件diff，减少页面渲染次数; slot 语法(编译的时候需要将 slot 节点设置为一个变量，然后render时，变量等于内部的_h函数代表的jsx，然后组件render时一起执行生成正确的虚拟dom);
 
 ### swiper 组件
 
