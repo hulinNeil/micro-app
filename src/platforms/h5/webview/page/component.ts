@@ -81,6 +81,10 @@ export const initComponent = (virtualDom: IVirtualDom, parentNode: HTMLElement) 
   delete props.__isComponent__;
 
   component.__route__ = __route__;
+  // 需要在这里处理下多个 slot 的情况
+  if (virtualDom.children?.length) {
+    virtualDom.children = [{ tag: 'wx-component-slot', children: virtualDom.children, props: {name:'default'} }];
+  }
   component.__component_slot = { default: virtualDom.children };
 
   const args: IRegisterComponent = { componentId: __componentId__, route: __route__, props };

@@ -104,7 +104,9 @@ export const applyEvent = (element: HTMLElement, key: string, eventHandleName: s
       let componentId = 0;
       let parentNode = res.target.parentNode;
       while (parentNode) {
-        if (parentNode.tagName && parentNode.tagName.toLocaleLowerCase() === 'wx-page-body') {
+        // 遇到根节点、component slot 节点就跳出循环
+        const breakTags = ['wx-page-body','wx-component-slot']
+        if (parentNode.tagName && breakTags.includes(parentNode.tagName.toLocaleLowerCase())) {
           break;
         }
         if (parentNode.__isComponent__) {
