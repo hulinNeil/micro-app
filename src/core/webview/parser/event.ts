@@ -103,17 +103,21 @@ export const applyEvent = (element: HTMLElement, key: string, eventHandleName: s
       // 判断当前元素是否自定义组件里面, 如果是 slot 中的元素是事假如何处理？
       let componentId = 0;
       let parentNode = res.target.parentNode;
-      while (parentNode) {
-        // 遇到根节点、component slot 节点就跳出循环
-        const breakTags = ['wx-page-body','wx-component-slot']
-        if (parentNode.tagName && breakTags.includes(parentNode.tagName.toLocaleLowerCase())) {
-          break;
+      // 如果不是component slot节点触发的事件，就去遍历其父组件，查看是否是组件内部触发的事件
+      if (!res.target.__isComponentSlot__) {
+        while (parentNode) {
+          // 遇到根节点就跳出循环
+          const breakTags = ['wx-page-body'];
+          if (parentNode.tagName && breakTags.includes(parentNode.tagName.toLocaleLowerCase())) {
+            break;
+          }
+
+          if (parentNode.__isComponent__) {
+            componentId = parentNode.__componentId__;
+            break;
+          }
+          parentNode = parentNode.parentNode;
         }
-        if (parentNode.__isComponent__) {
-          componentId = parentNode.__componentId__;
-          break;
-        }
-        parentNode = parentNode.parentNode;
       }
       publishPageEvent(eventHandleName, res, currentPageId, componentId);
     });

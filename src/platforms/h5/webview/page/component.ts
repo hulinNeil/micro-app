@@ -15,7 +15,7 @@ export class Component {
   __route__: string = ''; // eg: 'components/test/test'
   __DOMTree__: HTMLElement | Text | Comment | null = null;
   __VirtualDom__: IVirtualDom | null = null;
-  __component_slot: { [key: string]: IVirtualDom | IVirtualDom[] } = {};
+  __component_slot: { [key: string]: IVirtualDom[] } = {};
   parentNode: HTMLElement; // 一般为自定义组件的根节点，如：<my-component></my-component>
   constructor(parentNode: HTMLElement, webviewId: number, componentId: number) {
     this.__componentId__ = componentId;
@@ -81,11 +81,26 @@ export const initComponent = (virtualDom: IVirtualDom, parentNode: HTMLElement) 
   delete props.__isComponent__;
 
   component.__route__ = __route__;
-  // 需要在这里处理下多个 slot 的情况
+  component.__component_slot = {};
+  // 在这 slot 的情况，支持单个和多个 slot
   if (virtualDom.children?.length) {
-    virtualDom.children = [{ tag: 'wx-component-slot', children: virtualDom.children, props: {name:'default'} }];
+    const _default: IVirtualDom[] = [];
+    virtualDom.children.forEach((e) => {
+      e.props = Object.assign({}, { __isComponentSlot__: true }, e.props);
+      const slotKey = e.props.slot;
+      delete e.props.slot;
+      if (!slotKey) {
+        _default.push(e);
+      } else {
+        if (component.__component_slot[slotKey]) {
+          component.__component_slot[slotKey].push(e);
+        } else {
+          component.__component_slot[slotKey] = [e];
+        }
+      }
+    });
+    component.__component_slot.default = _default;
   }
-  component.__component_slot = { default: virtualDom.children };
 
   const args: IRegisterComponent = { componentId: __componentId__, route: __route__, props };
 
