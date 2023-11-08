@@ -8,12 +8,12 @@
   <view class="panel" wx:for="{{ list }}" wx:key="id">
     <view class="panel-h {{ item.open ? 'panel-h-on' : '' }}" data-index="{{ index }}" bindtap="triggerCollapse">
       <text class="panel-text">{{ item.name }}</text>
-      <view class="icon">&#xe62c;</view>
+      <text class="icon">&#xe62c;</text>
     </view>
     <view class="panel-c" wx:if="{{ item.open }}">
       <view class="navigate-item" wx:for="{{ item.pages }}" wx:key="url" data-url="{{ item }}" bindtap="goDetailPage">
         <view>{{ item }}</view>
-        <view class="icon">&#xe62d;</view>
+        <text class="icon">&#xe62d;</text>
       </view>
     </view>
   </view>
