@@ -13,6 +13,22 @@ class App extends Base {
   constructor() {
     const props = Object.assign({ selectIndex: 0 }, window.__wxConfig.tabBar || {});
     super(props);
+
+    const contentView = this.shadowRoot?.querySelector('.uni-tabbar') as HTMLElement;
+
+    contentView.addEventListener('click', (e) => {
+      let target = e.target as HTMLElement | null;
+      while (target) {
+        // 遇到根节点就跳出循环
+        if (target.classList.contains('uni-tabbar__item')) {
+          this._switchTab(target);
+          break;
+        } else if (target.classList.contains('uni-tabbar')) {
+          break;
+        }
+        target = target.parentElement;
+      }
+    });
   }
   connectedCallback() {
     // 初次触发active
@@ -36,8 +52,8 @@ class App extends Base {
   /**
    * 触发 item 的点击事件
    */
-  _switchTab(e: any) {
-    const index = Number(e.target.dataset.index);
+  _switchTab(e: HTMLElement) {
+    const index = Number(e.dataset.index);
     const { text, pagePath } = this.__data__.list[index];
     if (index !== this.__data__.selectIndex) {
       KipleViewJSBridge.publishHandler('onRouteChange', { type: 'switchTab', options: { url: pagePath } }, 0);

@@ -1,6 +1,6 @@
 import { componentPropsChange, initComponent } from '@/platforms/h5/webview/page/component';
 import { isFn, isPlainObject, isStr } from '@/util';
-import { addEvent, applyEvent } from './event';
+import { applyEvent } from './event';
 import { CreateIVirtualDomFunc } from './render.d';
 
 /**
@@ -14,7 +14,7 @@ export const setProperty = (dom: HTMLElement, key: string, value: any) => {
     applyEvent(dom, key, value);
   } else if (/(on):?(.+)/.test(key) && isStr(value)) {
     // 如果是 on 且 value 是 function，则认为是内部组件
-    addEvent(dom, key, value);
+    // addEvent(dom, key, value);
   } else if (key === 'style' && value) {
     // TODO style 属性需要进行 rpx2px 的转换
     if (isStr(value)) {

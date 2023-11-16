@@ -1,9 +1,7 @@
-import { isFn } from '@/util';
 import { publishPageEvent } from 'kiple-platform/webview/bridge';
 import { PageFactory } from 'kiple-platform/webview/page/page';
 
 const EventNames = ['tap', 'longtap', 'load', 'error'];
-const PrivateEventNames = ['click'];
 const PRESS_DELAY = 350; // 手指触摸后，超过 350ms 再离开, longtap事件
 const TAP_DISTANCE = 5; // tap事件的移动距离需要小于5px
 
@@ -120,31 +118,6 @@ export const applyEvent = (element: HTMLElement, key: string, eventHandleName: s
         }
       }
       publishPageEvent(eventHandleName, res, currentPageId, componentId);
-    });
-  }
-};
-
-/**
- * 处理使用虚拟 dom 创建的内部组件的事件
- */
-export const addEvent = (dom: HTMLElement, key: string, value: any) => {
-  const eventNames = /(on):?(.+)/.exec(key);
-  if (eventNames && PrivateEventNames.includes(eventNames[2].toLocaleLowerCase())) {
-    const eventName = eventNames[2].toLocaleLowerCase();
-    dom.addEventListener(eventName, (e: any) => {
-      let path = e.path;
-      if (path) {
-        for (const key in path) {
-          if (path[key] && path[key]?.nodeName.includes('WX-')) {
-            if (path[key][value] && isFn(path[key][value])) {
-              path[key][value].call(path[key], {
-                target: e.currentTarget,
-              });
-            }
-            break;
-          }
-        }
-      }
     });
   }
 };
