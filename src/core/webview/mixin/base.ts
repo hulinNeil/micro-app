@@ -1,7 +1,7 @@
 import { diff } from '../parser/diff/diff';
 import { patch } from '../parser/diff/patch';
 import { render } from '../parser/render';
-import Property from './property';
+import Property, { IComponentProps } from './property';
 
 type Props = { [key: string]: any };
 
@@ -13,7 +13,7 @@ const BaseWrapper = (Parent: typeof HTMLElement) => {
     static is = 'wx-base';
     __VirtualDom__: IVirtualDom | null = null;
     __DOMTree__: HTMLElement | Text | Comment | null = null;
-    __data__: any = {};
+    __data__: any = {}; // 储存组件 props 和组件内部的 data
     static get properties() {
       return {
         hidden: { type: Boolean, reflectToAttribute: true },
@@ -23,8 +23,9 @@ const BaseWrapper = (Parent: typeof HTMLElement) => {
     // Base 基类会暴露一个方法，用于子类重新渲染组件
     constructor(props?: Props) {
       super();
-      // 将传递的值保存下来，用于 setData 的 reRender.
-      this.__data__ = props || {};
+      // 将传递的值保存下来，用于 setData 的 Render.
+      const elementData = (this as any).data ? (this as any).data() : {};
+      this.__data__ = Object.assign({}, this.getElementProps(), elementData, props || {});
       // 开启 attachShadow
       const shadowRoot = this.attachShadow({ mode: 'open' });
 
@@ -35,6 +36,7 @@ const BaseWrapper = (Parent: typeof HTMLElement) => {
         shadowRoot.appendChild(templateNode.content.cloneNode(true));
         return;
       }
+
       // 创建模板--- 使用模板语法
       this.__VirtualDom__ = (this.constructor as any).template(props || {});
       this.__DOMTree__ = shadowRoot as any;
@@ -61,9 +63,24 @@ const BaseWrapper = (Parent: typeof HTMLElement) => {
     }
 
     triggerEvent(eventName: string, detail: any = {}) {
+      console.log('=====', eventName);
       const event: any = new Event(eventName, { bubbles: false, composed: false });
       event.detail = detail;
       this.dispatchEvent(event);
+    }
+
+    // 获取 组件的属性，用于第一次 render jsx
+    getElementProps() {
+      const props = (this as any).__properties__ as IComponentProps;
+      const _props: Props = {};
+      for (var key in props) {
+        if (props[key].type) {
+          _props[key] = props[key].value ? props[key].type(props[key].value) : props[key].type();
+        } else {
+          _props[key] = props[key].value;
+        }
+      }
+      return _props;
     }
   }
 

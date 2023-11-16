@@ -8,6 +8,7 @@
     "pages/component/button/button",
     "pages/component/image/image",
     "pages/component/navigator/navigator",
+    "pages/component/progress/progress",
     "pages/logs/logs",
     "pages/transparent/index",
     "pages/api/set-navigation-bar/set-navigation-bar",

@@ -17,13 +17,13 @@ class PageHead extends Base {
   static template = template;
   static get properties(): any {
     return {
-      navigationBarTextStyle: { type: String, value: 'black', observer: '_onNavigationBarChange' },
-      navigationBarBackgroundColor: { type: String, value: '#F7F7F7', observer: '_onNavigationBarChange' },
-      navigationBarTitleText: { type: String, value: '', observer: '_onNavigationBarChange' },
-      navigationStyle: { type: String, value: 'default', observer: '_onNavigationBarChange' },
+      navigationBarTextStyle: { type: String, value: 'black', observer: '_onNavigationBarChange', initObserver: true },
+      navigationBarBackgroundColor: { type: String, value: '#F7F7F7', observer: '_onNavigationBarChange', initObserver: true },
+      navigationBarTitleText: { type: String, value: '', observer: '_onNavigationBarChange', initObserver: true },
+      navigationStyle: { type: String, value: 'default', observer: '_onNavigationBarChange', initObserver: true },
       coverage: { type: Number, value: 132 }, // 滑动时渐变的区域距离
       loading: { type: Boolean, value: false, reflectToAttribute: true },
-      showBackButton: { type: Boolean, value: true, observer: '_setBackButton' },
+      showBackButton: { type: Boolean, value: true, observer: '_setBackButton', initObserver: true },
     };
   }
   placeholderView: HTMLElement;
