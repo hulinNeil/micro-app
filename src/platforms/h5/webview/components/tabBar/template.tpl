@@ -48,7 +48,7 @@
       class="uni-tabbar__border"
       style="background-color: {{borderStyle === 'white' ? 'rgba(255, 255, 255, 0.33)' : 'rgba(0, 0, 0, 0.33)'}};"
     ></div>
-    <div class="uni-tabbar__item" k:for="{{ list }}" onclick="_switchTab" data-index="{{ index }}">
+    <div class="uni-tabbar__item" wx:for="{{ list }}" onclick="_switchTab" data-index="{{ index }}">
       <div class="uni-tabbar__item-icon">
         <img src="/{{index === selectIndex ? item.selectedIconPath : item.iconPath}}" />
       </div>

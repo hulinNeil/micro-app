@@ -52,7 +52,7 @@ const generateFromAST = (htmlAST: ASTElement): IGenCode => {
 
   if (htmlAST.type === 'tag') {
     // 判断是 import template 模板
-    if (htmlAST.name === 'template') {
+    if (htmlAST.name === 'template' && !process.env.BUILD_TYPE && process.env.BUILD_TYPE !== 'framework') {
       // 模板源文件
       if (htmlAST.attribs.name) {
         const children: string[] = transformASTChildren(htmlAST, result);

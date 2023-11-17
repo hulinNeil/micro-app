@@ -15,6 +15,7 @@ specifiers:
   '@rollup/plugin-inject': ^4.0.3
   '@rollup/plugin-node-resolve': ^11.2.1
   '@rollup/plugin-replace': ^2.4.2
+  '@rollup/plugin-typescript': ^11.1.5
   '@types/babel__core': ^7.1.14
   '@types/babel__preset-env': ^7.9.1
   '@types/fs-extra': ^9.0.11
@@ -37,7 +38,6 @@ specifiers:
   postcss-import: ^14.0.2
   rollup: ^2.45.2
   rollup-plugin-serve: ^2.0.0
-  rollup-plugin-typescript2: ^0.30.0
   ts-jest: ^28.0.5
   ts-loader: ^9.0.2
   ts-node-dev: ^2.0.0
@@ -68,6 +68,7 @@ devDependencies:
   '@rollup/plugin-inject': 4.0.4_rollup@2.75.7
   '@rollup/plugin-node-resolve': 11.2.1_rollup@2.75.7
   '@rollup/plugin-replace': 2.4.2_rollup@2.75.7
+  '@rollup/plugin-typescript': 11.1.5_g4qkabtmybowem44p7ts7jnbqm
   '@types/babel__core': 7.1.19
   '@types/babel__preset-env': 7.9.2
   '@types/fs-extra': 9.0.13
@@ -87,7 +88,6 @@ devDependencies:
   postcss: 8.4.14
   postcss-import: 14.1.0_postcss@8.4.14
   rollup-plugin-serve: 2.0.0
-  rollup-plugin-typescript2: 0.30.0_okefoyb4o5sittgqayreuhurei
   ts-jest: 28.0.5_mwprd6hhcpczqm5enxplqm5dfm
   ts-loader: 9.3.1_3o2jfq6vfqxns3sz6wn2nnc3ei
   ts-node-dev: 2.0.0_bqee57coj3oib6dw4m24wknwqe
@@ -1671,6 +1671,26 @@ packages:
       rollup: 2.75.7
     dev: true
 
+  /@rollup/plugin-typescript/11.1.5_g4qkabtmybowem44p7ts7jnbqm:
+    resolution: {integrity: sha512-rnMHrGBB0IUEv69Q8/JGRD/n4/n6b3nfpufUu26axhUcboUzv/twfZU8fIBbTOphRAe0v8EyxzeDpKXqGHfyDA==}
+    engines: {node: '>=14.0.0'}
+    peerDependencies:
+      rollup: ^2.14.0||^3.0.0||^4.0.0
+      tslib: '*'
+      typescript: '>=3.7.0'
+    peerDependenciesMeta:
+      rollup:
+        optional: true
+      tslib:
+        optional: true
+    dependencies:
+      '@rollup/pluginutils': 5.0.5_rollup@2.75.7
+      resolve: 1.22.1
+      rollup: 2.75.7
+      tslib: 2.4.0
+      typescript: 4.7.4
+    dev: true
+
   /@rollup/pluginutils/3.1.0_rollup@2.75.7:
     resolution: {integrity: sha512-GksZ6pr6TpIjHm8h9lSQ8pi8BE9VeubNT0OMJ3B5uZJ8pz73NPiqOtCog/x2/QzM1ENChPKxMDhiQuRHsqc+lg==}
     engines: {node: '>= 8.0.0'}
@@ -1683,12 +1703,19 @@ packages:
       rollup: 2.75.7
     dev: true
 
-  /@rollup/pluginutils/4.2.1:
-    resolution: {integrity: sha512-iKnFXr7NkdZAIHiIWE+BX5ULi/ucVFYWD6TbAV+rZctiRTY2PL6tsIKhoIOaoskiWAkgu+VsbXgUVDNLHf+InQ==}
-    engines: {node: '>= 8.0.0'}
+  /@rollup/pluginutils/5.0.5_rollup@2.75.7:
+    resolution: {integrity: sha512-6aEYR910NyP73oHiJglti74iRyOwgFU4x3meH/H8OJx6Ry0j6cOVZ5X/wTvub7G7Ao6qaHBEaNsV3GLJkSsF+Q==}
+    engines: {node: '>=14.0.0'}
+    peerDependencies:
+      rollup: ^1.20.0||^2.0.0||^3.0.0||^4.0.0
+    peerDependenciesMeta:
+      rollup:
+        optional: true
     dependencies:
+      '@types/estree': 1.0.5
       estree-walker: 2.0.2
       picomatch: 2.3.1
+      rollup: 2.75.7
     dev: true
 
   /@sinclair/typebox/0.23.5:
@@ -1779,6 +1806,10 @@ packages:
 
   /@types/estree/0.0.51:
     resolution: {integrity: sha512-CuPgU6f3eT/XgKKPqKd/gLZV1Xmvf1a2R5POBOGQa6uv82xpls89HU5zKeVoyR8XzHd1RGNOlQlvUe3CFkjWNQ==}
+
+  /@types/estree/1.0.5:
+    resolution: {integrity: sha512-/kYRxGDLWzHOB7q+wtSUQlFrtcdUccpfy+X+9iMBpHK8QLLhx2wIPYuS5DYtR9Wa/YlZAbIovy7qVdB1Aq6Lyw==}
+    dev: true
 
   /@types/fs-extra/9.0.13:
     resolution: {integrity: sha512-nEnwB++1u5lVDM2UI4c1+5R+FYaKfaAzS4OococimjVm3nQw3TuzH5UNsocrcTBbhnerblyHj4A49qXbIiZdpA==}
@@ -3563,15 +3594,6 @@ packages:
       universalify: 2.0.0
     dev: true
 
-  /fs-extra/8.1.0:
-    resolution: {integrity: sha512-yhlQgA6mnOJUKOsRUFsgJdQCvkKhcz8tlZG5HBQfReYZy46OwLcY+Zia0mtdHsOo9y/hP+CxMN0TU9QxoOtG4g==}
-    engines: {node: '>=6 <7 || >=8'}
-    dependencies:
-      graceful-fs: 4.2.10
-      jsonfile: 4.0.0
-      universalify: 0.1.2
-    dev: true
-
   /fs.realpath/1.0.0:
     resolution: {integrity: sha512-OO0pH2lK6a0hZnAdau5ItzHPI6pUlvI7jMVnxUQRtw4owF2wk8lOSabtGDCTP4Ggrg2MbGnWO9X8K1t4+fGMDw==}
     dev: true
@@ -3580,7 +3602,7 @@ packages:
     resolution: {integrity: sha512-oWb1Z6mkHIskLzEJ/XWX0srkpkTQ7vaopMQkyaEIoq0fmtFVxOthb8cCxeT+p3ynTdkk/RZwbgG4brR5BeWECw==}
     engines: {node: '>= 4.0'}
     os: [darwin]
-    deprecated: fsevents 1 will break on node v14+ and could be using insecure binaries. Upgrade to fsevents 2.
+    deprecated: The v1 package contains DANGEROUS / INSECURE binaries. Upgrade to safe fsevents v2
     requiresBuild: true
     dependencies:
       bindings: 1.5.0
@@ -4866,12 +4888,6 @@ packages:
     hasBin: true
     dev: true
 
-  /jsonfile/4.0.0:
-    resolution: {integrity: sha512-m6F1R3z8jjlf2imQHS2Qez5sjKWQzbuuhuJ/FKYFRZvPE3PuHcSMVZzfsLhGVOkfd20obL5SWEBew5ShlquNxg==}
-    optionalDependencies:
-      graceful-fs: 4.2.10
-    dev: true
-
   /jsonfile/6.1.0:
     resolution: {integrity: sha512-5dgndWOriYSm5cnYaJNhalLNDKOqFwyDB/rr1E9ZsGciGvKPs8R2xYGCacuf3z6K1YKDz182fd+fY3cn3pMqXQ==}
     dependencies:
@@ -5953,13 +5969,6 @@ packages:
     engines: {node: '>=10'}
     dev: true
 
-  /resolve/1.20.0:
-    resolution: {integrity: sha512-wENBPt4ySzg4ybFQW2TT1zMQucPK95HSh/nq2CFTZVOGut2+pQvSsgtda4d26YrYcr067wjbmzOG8byDPBX63A==}
-    dependencies:
-      is-core-module: 2.9.0
-      path-parse: 1.0.7
-    dev: true
-
   /resolve/1.22.1:
     resolution: {integrity: sha512-nBpuuYuY5jFsli/JIs1oldw6fOQCBioohqWZg/2hiaOybXOft4lonv85uDOKXdf8rhyK159cxU5cDcK/NKk8zw==}
     hasBin: true
@@ -5997,21 +6006,6 @@ packages:
     dependencies:
       mime: 3.0.0
       opener: 1.5.2
-    dev: true
-
-  /rollup-plugin-typescript2/0.30.0_okefoyb4o5sittgqayreuhurei:
-    resolution: {integrity: sha512-NUFszIQyhgDdhRS9ya/VEmsnpTe+GERDMmFo0Y+kf8ds51Xy57nPNGglJY+W6x1vcouA7Au7nsTgsLFj2I0PxQ==}
-    peerDependencies:
-      rollup: '>=1.26.3'
-      typescript: '>=2.4.0'
-    dependencies:
-      '@rollup/pluginutils': 4.2.1
-      find-cache-dir: 3.3.2
-      fs-extra: 8.1.0
-      resolve: 1.20.0
-      rollup: 2.75.7
-      tslib: 2.1.0
-      typescript: 4.7.4
     dev: true
 
   /rollup/2.75.7:
@@ -6749,10 +6743,6 @@ packages:
       '@types/strip-json-comments': 0.0.30
       strip-bom: 3.0.0
       strip-json-comments: 2.0.1
-    dev: true
-
-  /tslib/2.1.0:
-    resolution: {integrity: sha512-hcVC3wYEziELGGmEEXue7D75zbwIIVUMWAVbHItGPx0ziyXxrOMQx4rQEVEV45Ut/1IotuEvwqPopzIOkDMf0A==}
     dev: true
 
   /tslib/2.4.0:

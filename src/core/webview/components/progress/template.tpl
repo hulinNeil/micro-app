@@ -32,5 +32,5 @@
   <div style="{{outerBarStyle}}" class="uni-progress-bar">
     <div style="{{innerBarStyle}}" class="uni-progress-inner-bar" />
   </div>
-  <p class="uni-progress-info">{{ currentPercent }}%</p>
+  <p class="uni-progress-inf2os" wx:if="{{ currentPercent === 2 }}">{{ currentPercent }}%</p>
 </template>

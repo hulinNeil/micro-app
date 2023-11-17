@@ -14,6 +14,7 @@ class Progress extends Base {
   static get properties(): any {
     return {
       percent: { type: Number, observer: 'percentChanged' },
+      showInfo: { type: Boolean, value: false },
       activeColor: { type: String, value: VALUES.activeColor },
       backgroundColor: { type: String, value: VALUES.backgroundColor },
       active: { type: Boolean, value: false },
@@ -25,7 +26,7 @@ class Progress extends Base {
     super();
   }
   data() {
-    return { outerBarStyle: {} };
+    return { outerBarStyle: {}, currentPercent: 0 };
   }
   percentChanged(oldValue: string, newValue: string) {
     console.log(oldValue, newValue, this.getElementProps(), (this as any).__data__);

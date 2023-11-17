@@ -1,6 +1,6 @@
 import * as rollup from 'rollup';
 import { resolveApp } from './utils';
-const ts = require('rollup-plugin-typescript2');
+const ts = require('@rollup/plugin-typescript');
 
 const tsPlugin = ts({
   tsconfig: resolveApp('tsconfig.json'), // 导入本地ts配置
